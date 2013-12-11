@@ -6,8 +6,7 @@ import inspect
 class Transcriber:
     def __init__(self, audio_URL, parameters):
         self.audio_URL = audio_URL
-        self.config_path = self.from_module_dir('config.xml')
-        # TODO: add object ID
+        self.config_path = self.from_module_dir('config_{}.xml'.format(id(self)))
 
         # load text from config_template.xml
         template_path = self.from_module_dir('config_template.xml')
