@@ -10,6 +10,7 @@ accoustic_model = from_cwd('models/hub4opensrc.cd_continuous_8gau')
 dictionary = from_cwd('models/cmudict.0.7a_SPHINX_40')
 filler = from_cwd('models/wsj_noisedict')
 
+# note that numbers must be expressed as strings
 parameters = {
     'absoluteBeamWidth': '700',
     'absoluteWordBeamWidth': '100',
