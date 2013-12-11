@@ -6,7 +6,6 @@ import inspect
 class Transcriber:
     def __init__(self, audio_URL, parameters):
         self.audio_URL = audio_URL
-        self.parameters = parameters
         self.config_path = self.from_module_dir('config.xml')
         # TODO: add object ID
 
@@ -23,6 +22,12 @@ class Transcriber:
         # write text to config.xml
         with open(self.config_path,'w+') as output_file:
             output_file.write(text)
+
+    def close(self):
+        try:
+            os.remove(self.config_path)
+        except OSError:
+            pass
 
     def from_module_dir(self, relative_path):
         # TODO: may not work for every OS
