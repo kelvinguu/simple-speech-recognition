@@ -76,23 +76,3 @@ class Transcriber(object):
                 yield output
             except pexpect.EOF:
                 break
-
-class WordPhoneMap:
-    def __init__(self, dict_dir):
-        # load phonetic dictionary
-        self.phone_dict = {};
-        with open(dict_dir,'r') as phone_dict_file:
-            for line in phone_dict_file:
-                line_arr = re.split('\s',line)
-                word = line_arr[0].lower()
-                phonemes = line_arr[1:-1]
-                self.phone_dict[word] = phonemes
-
-    def __getitem__(self, key):
-        try:
-            return self.phone_dict[key.lower()]
-        except:
-            return ['NONE']
-
-
-
