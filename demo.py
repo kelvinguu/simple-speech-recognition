@@ -28,7 +28,7 @@ parameters = {
 audio_URL = 'file://localhost' + from_cwd('audio/npr_short.wav')
 transcriber = cmu_sphinx4.Transcriber(audio_URL, parameters)
 
-for line in transcriber.transcript_stream()
+for line in transcriber.transcript_stream():
     print line
 
 transcriber.close()
