@@ -5,10 +5,10 @@ def from_cwd(relative_path):
     return os.path.join(os.getcwd(), relative_path.lstrip('\/'))
 
 # path parameters passed into Transcriber must be full paths, not relative
-lang_model = from_cwd('models/language_model.arpaformat.DMP')
-accoustic_model = from_cwd('models/hub4opensrc.cd_continuous_8gau')
-dictionary = from_cwd('models/cmudict.0.7a_SPHINX_40')
-filler = from_cwd('models/wsj_noisedict')
+lang_model = from_cwd('lib/models/language_model.arpaformat.DMP')
+accoustic_model = from_cwd('lib/models/hub4opensrc.cd_continuous_8gau')
+dictionary = from_cwd('lib/models/cmudict.0.7a_SPHINX_40')
+filler = from_cwd('lib/models/wsj_noisedict')
 
 # note that numbers must be expressed as strings
 parameters = {
