@@ -1,3 +1,4 @@
+
 # Python wrapper for CMU Sphinx-4
 A complete speech recognition system configured and ready to use with just a few lines of Python:
 
@@ -14,18 +15,33 @@ for line in transcriber.transcript_stream():
 transcriber.close()
 ```
 
-**NOTE**: the word error rate (WER) of the default configuration is roughly 0.48. This is still quite high due to the particular choice of parameters.
+## Usage
+
+### Processing local files
+To point the transcriber to a file on your computer, just prepend `file://localhost` to the front of your file path, which makes it a URL:
+
+```python
+audio_URL = 'file://localhost' + '/Users/Kelvin/audio.wav'
+```
+
+### Processing live/never-ending audio streams
+The transcriber will output text as the audio is being read in, rather than waiting to read the whole file before processing. So, you can set the `audio_URL` to a never-ending or live audio stream and it will still work.
+
+(`transcriber.transcript_stream()` is a [generator](https://wiki.python.org/moin/Generators) which will keep producing lines of transcribed text while the audio keeps playing.)
+
+### A note on accuracy
+The word error rate (WER) of the default configuration is roughly 0.48. This is still quite high due to the particular choice of parameters.
 
 **If you have a better configuration, I would love to incorporate it (and of course credit you here).** You can let me know by creating an issue. (Click 'Issues' in the sidebar on the right.)
 
 ## About CMU Sphinx-4
 [CMU Sphinx-4](http://cmusphinx.sourceforge.net/) is one of the most popular open source speech recognition systems, according to [Wikipedia](http://en.wikipedia.org/wiki/List_of_speech_recognition_software). However, it takes some effort to set up, and doesn't work on large vocabularies without some configuration. This Python wrapper has done all that work for you, so you can immediately start converting speech to text!
 
-# Dependencies
+## Dependencies
 - This project uses [**pexpect**](http://pexpect.sourceforge.net/pexpect.html) to interface with CMU Sphinx-4, which is written in Java.
-- CMU Sphinx-4 is *already included in this repository*, so there is no need to download it.
+- CMU Sphinx-4 is *already included in this repository* as `sphinx.jar`, so there is no need to download it. `sphinx.jar` is the latest version of Sphinx-4 provided on Sourceforge as of December 11, 2013.
 
-# Install
+## Install
 - Install **pexpect** on the command line: `easy_install pexpect`
 - Clone this repo: `git clone git@github.com:ke1vin/simple-speech-recognition.git`
 - Obtain the required language model file (which was too big to put in this repository):
