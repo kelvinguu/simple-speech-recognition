@@ -2,21 +2,22 @@ import pexpect
 import os
 import inspect
 
-def from_module_dir(relative_path):
+def from_lib_dir(relative_path):
     """
     Return a full canonical path, by resolving relative_path as if the current
-    directory was the directory that contains this module.
+    directory was the directory of lib
     """
     # TODO: may not work for every OS
     module_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-    abs_path =  os.path.join(module_dir, relative_path.lstrip('\/'))
+    lib_dir = os.path.join(module_dir, 'lib')
+    abs_path =  os.path.join(lib_dir, relative_path.lstrip('\/'))
     return abs_path
 
 class Transcriber(object):
-    lang_model = from_module_dir('models/language_model.arpaformat.DMP')
-    accoustic_model = from_module_dir('models/hub4opensrc.cd_continuous_8gau')
-    dictionary = from_module_dir('models/cmudict.0.7a_SPHINX_40')
-    filler = from_module_dir('models/wsj_noisedict')
+    lang_model = from_lib_dir('models/language_model.arpaformat.DMP')
+    accoustic_model = from_lib_dir('models/hub4opensrc.cd_continuous_8gau')
+    dictionary = from_lib_dir('models/cmudict.0.7a_SPHINX_40')
+    filler = from_lib_dir('models/wsj_noisedict')
 
     default_params = {
         'absoluteBeamWidth': '1000',
@@ -39,10 +40,10 @@ class Transcriber(object):
         MS WAV format.
         """
         self.audio_URL = audio_URL
-        self.config_path = from_module_dir('config_{}.xml'.format(id(self)))
+        self.config_path = from_lib_dir('config_{}.xml'.format(id(self)))
 
         # load text from config_template.xml
-        template_path = from_module_dir('config_template.xml')
+        template_path = from_lib_dir('config_template.xml')
         with open(template_path, 'r') as input_file:
             text = input_file.read()
 
@@ -69,8 +70,8 @@ class Transcriber(object):
         Launch Sphinx-4 and pass it the target audio.
         """
         # construct class_path
-        sphinx_jar_path = from_module_dir('sphinx4.jar')
-        class_path = from_module_dir('') + ":" + sphinx_jar_path
+        sphinx_jar_path = from_lib_dir('sphinx4.jar')
+        class_path = from_lib_dir('') + ":" + sphinx_jar_path
         config_URL = 'file://localhost' + self.config_path
 
         # execute CMU Sphinx
