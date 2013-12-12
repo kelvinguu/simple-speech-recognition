@@ -19,13 +19,13 @@ class Transcriber(object):
     filler = from_module_dir('models/wsj_noisedict')
 
     default_params = {
-        'absoluteBeamWidth': '700',
+        'absoluteBeamWidth': '1000',
         'absoluteWordBeamWidth': '100',
         'relativeBeamWidth': '1E-80',
         'relativeWordBeamWidth': '1E-60',
         'wordInsertionProbability': '0.2',
         'silenceInsertionProbability': '.1',
-        'languageWeight': '10.5',
+        'languageWeight': '8',
         'languageModelLocation': lang_model,
         'acousticModelLocation': accoustic_model,
         'dictionaryPath': dictionary,
@@ -35,6 +35,8 @@ class Transcriber(object):
     def __init__(self, audio_URL, parameters=default_params):
         """
         Create Sphinx-4 config file with specified parameters.
+        WARNING: the audio file specified MUST be 16 kHz 16 bit mono files in
+        MS WAV format.
         """
         self.audio_URL = audio_URL
         self.config_path = from_module_dir('config_{}.xml'.format(id(self)))

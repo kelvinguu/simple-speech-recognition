@@ -12,7 +12,7 @@ filler = from_cwd('models/wsj_noisedict')
 
 # note that numbers must be expressed as strings
 parameters = {
-    'absoluteBeamWidth': '700',
+    'absoluteBeamWidth': '500',
     'absoluteWordBeamWidth': '100',
     'relativeBeamWidth': '1E-80',
     'relativeWordBeamWidth': '1E-60',
@@ -25,6 +25,8 @@ parameters = {
     'fillerPath': filler
 }
 
+# WARNING: the audio file specified MUST be 16 kHz 16 bit mono files in
+# MS WAV format.
 audio_URL = 'file://localhost' + from_cwd('audio/npr_short.wav')
 transcriber = cmu_sphinx4.Transcriber(audio_URL, parameters)
 
