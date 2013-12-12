@@ -1,9 +1,12 @@
-import re
 import pexpect
 import os
 import inspect
 
 def from_module_dir(relative_path):
+    """
+    Return a full canonical path, by resolving relative_path as if the current
+    directory was the directory that contains this module.
+    """
     # TODO: may not work for every OS
     module_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     abs_path =  os.path.join(module_dir, relative_path.lstrip('\/'))
@@ -30,6 +33,9 @@ class Transcriber(object):
         }
 
     def __init__(self, audio_URL, parameters=default_params):
+        """
+        Create Sphinx-4 config file with specified parameters.
+        """
         self.audio_URL = audio_URL
         self.config_path = from_module_dir('config_{}.xml'.format(id(self)))
 
@@ -48,12 +54,18 @@ class Transcriber(object):
             output_file.write(text)
 
     def close(self):
+        """
+        Deletes Sphinx-4 config file associated with this object.
+        """
         try:
             os.remove(self.config_path)
         except OSError:
             pass
 
     def transcript_stream(self):
+        """
+        Launch Sphinx-4 and pass it the target audio.
+        """
         # construct class_path
         sphinx_jar_path = from_module_dir('sphinx4.jar')
         class_path = from_module_dir('') + ":" + sphinx_jar_path
