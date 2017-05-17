@@ -43,7 +43,7 @@ The word error rate (WER) of the default configuration is roughly 0.48. This is 
 
 ## Install
 - Install **pexpect** on the command line: `easy_install pexpect`
-- Clone this repo: `git clone git@github.com:ke1vin/simple-speech-recognition.git`
+- Clone this repo: `git clone https://github.com/kelvinguu/simple-speech-recognition.git`
 - Obtain the required language model file (which was too big to put in this repository):
     1. Download `HUB4_trigram_lm.zip` [here](http://sourceforge.net/projects/cmusphinx/files/Acoustic%20and%20Language%20Models/US%20English%20HUB4%20Language%20Model/). This should be roughly 92 MB.
     2. Unzip `HUB4_trigram_lm.zip`. Inside, you will find `language_model.arpaformat.DMP`.
